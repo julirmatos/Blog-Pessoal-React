@@ -32,10 +32,10 @@ function Home() {
                         <h2
                             style={{
                                 fontSize: "3rem", 
-                                fontWeight: "bold"
+                                fontWeight: "bold",
+                                textAlign: "center"
                             }}
-                        >
-                            👋 Bem Vindos!
+                    >👋Bem Vindos ao Blog da Ju!
                         </h2>
 
                         <p
