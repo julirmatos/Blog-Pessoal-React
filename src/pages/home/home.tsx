@@ -1,89 +1,82 @@
-
 function Home() {
-    return (
-        <>
-            <div
-                style={{
-                    backgroundColor: "#312e81", 
-                    display: "flex",
-                    justifyContent: "center"
-                }}
-            >
-                <div
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr", 
-                        color: "white",
-                        width: "100%",
-                        maxWidth: "1280px", 
-                    }}
-                >
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "1rem", 
-                            alignItems: "center",
-                            justifyContent: "center",
-                            paddingTop: "1rem", 
-                            paddingBottom: "1rem"
-                        }}
-                    >
-                        <h2
-                            style={{
-                                fontSize: "3rem", 
-                                fontWeight: "bold",
-                                textAlign: "center"
-                            }}
-                    >👋Bem Vindos ao Blog da Ju!
-                        </h2>
+  return (
+    <div className="bg-[#6f9a9a] flex justify-center min-h-screen">
+      <div className="grid grid-cols-1 md:grid-cols-2 w-full max-w-7xl">
 
-                        <p
-                            style={{
-                                fontSize: "1.25rem" 
-                            }}
-                        >
-                            Expresse aqui seus pensamentos e opiniões 💭
-                        </p>
+        {/* CARD DE TEXTO */}
+<div className="flex items-center justify-center p-6">
+  <div
+    className="
+      bg-[#f2f1ed]/90
+      backdrop-blur
+      rounded-3xl
+      shadow-2xl
+      p-12
+      max-w-xl
+      text-center
+    "
+  >
+    <h2
+      className="
+        text-4xl
+        md:text-5xl
+        font-extrabold
+        tracking-tight
+        text-[#2b2b2b]
+      "
+    >
+      👋 Bem-vindos ao Blog da Ju!
+    </h2>
 
-                        <div
-                            style={{
-                                display: "flex",
-                                justifyContent: "space-around",
-                                gap: "1rem"
-                            }}
-                        >
-                            <div
-                                style={{
-                                    borderRadius: "0.5rem",
-                                    color: "white",
-                                    border: "2px solid white",
-                                    padding: "0.5rem 1rem"
-                                }}
-                            >
-                                Nova Postagem
-                            </div>
-                        </div>
-                    </div>
+    <p
+      className="
+        text-lg
+        md:text-xl
+        text-[#4f7f7a]
+        mt-6
+        leading-relaxed
+      "
+    >
+      Expresse aqui seus pensamentos, ideias e opiniões de forma leve,
+      moderna e inspiradora 💭
+    </p>
 
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "center"
-                        }}
-                    >
-                        <img
-                            src="https://i.imgur.com/fyfri1v.png"
-                            alt="Imagem Página Home"
-                            style={{
-                                width: "66%"
-                            }}
-                        />
-                    </div>
-                </div>
-            </div>
-        </>
-    )
+    <button
+      className="
+        mt-10
+        px-10
+        py-4
+        text-lg
+        font-semibold
+        rounded-xl
+        border
+        border-[#6f9a9a]
+        bg-[#6f9a9a]
+        text-white
+        hover:bg-white
+        hover:text-[#3f6f7a]
+        hover:border-[#3f6f7a]
+        transition-all
+        duration-300
+      "
+    >
+      Nova Postagem
+    </button>
+  </div>
+</div>
+
+        {/* IMAGEM */}
+        <div className="flex justify-center items-center p-6">
+          <img
+            src="https://plus.unsplash.com/premium_vector-1714406096462-037325ee4f4b?q=80&w=715&auto=format&fit=crop"
+            alt="Ilustração de pessoa usando notebook"
+            className="w-full max-w-md rounded-xl bg-[#f2f1ed] p-4 shadow-xl"
+          />
+        </div>
+
+      </div>
+    </div>
+  );
 }
 
-export default Home
+export default Home;
