@@ -1,21 +1,39 @@
+import { Link } from "react-router-dom";
+
 function Navbar() {
   return (
-    <header className="w-full bg-gray-300 text-gray-800">
-      <div className="container mx-auto flex justify-between py-4 px-8 text-lg">
-        <span className="font-bold">
-          👩‍💻 Blog Pessoal 
-        </span>
+    <header className="w-full bg-gray-100 shadow-sm">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+        
+        {/* Logo */}
+        <Link
+          to="/home"
+          className="font-bold text-lg text-gray-800 hover:text-gray-600"
+        >
+          👩‍💻 Blog Pessoal
+        </Link>
 
-        <nav className="flex gap-4">
-          <span className="cursor-pointer hover:text-gray-600">Postagens</span>
-          <span className="cursor-pointer hover:text-gray-600">Temas</span>
-          <span className="cursor-pointer hover:text-gray-600">Cadastrar tema</span>
-          <span className="cursor-pointer hover:text-gray-600">Perfil</span>
-          <span className="cursor-pointer hover:text-gray-600">Sair</span>
+        {/* Menu centralizado */}
+        <nav className="flex gap-6 text-gray-700 font-medium">
+          <Link to="/postagens" className="hover:text-gray-500">
+            Postagens
+          </Link>
+          <Link to="/temas" className="hover:text-gray-500">
+            Temas
+          </Link>
+          <Link to="/cadastrar-tema" className="hover:text-gray-500">
+            Cadastrar tema
+          </Link>
+          <Link to="/perfil" className="hover:text-gray-500">
+            Perfil
+          </Link>
+          <button className="hover:text-red-500">
+            Sair
+          </button>
         </nav>
       </div>
     </header>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
