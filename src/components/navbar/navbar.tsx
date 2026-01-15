@@ -4,30 +4,32 @@ function Navbar() {
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-gray-100 shadow-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+
         <Link
           to="/home"
-          className="font-bold text-lg text-gray-800 hover:text-gray-600"
+          className="font-extrabold text-xl text-gray-900 tracking-tight hover:text-gray-700 transition"
         >
           👩‍💻 Blog Pessoal
         </Link>
 
-        <nav className="flex gap-6 text-gray-700 font-medium">
-          <Link to="/postagens" className="hover:text-gray-500">
+        <nav className="flex gap-8 text-gray-800 font-semibold text-base">
+          <Link to="/postagens" className="hover:text-[#7aa3a3] transition">
             Postagens
           </Link>
-          <Link to="/temas" className="hover:text-gray-500">
+          <Link to="/temas" className="hover:text-[#7aa3a3] transition">
             Temas
           </Link>
-          <Link to="/cadastrar-tema" className="hover:text-gray-500">
+          <Link to="/cadastrar-tema" className="hover:text-[#7aa3a3] transition">
             Cadastrar tema
           </Link>
-          <Link to="/perfil" className="hover:text-gray-500">
+          <Link to="/perfil" className="hover:text-[#7aa3a3] transition">
             Perfil
           </Link>
-          <button className="hover:text-red-500">
+          <Link to="/sair" className="hover:text-[#7aa3a3] transition">
             Sair
-          </button>
+          </Link>
         </nav>
+
       </div>
     </header>
   );
