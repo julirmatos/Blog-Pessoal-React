@@ -6,18 +6,19 @@ function Footer() {
 
   return (
     <footer className="flex justify-center bg-gray-300 text-gray-800">
-      <div className="container flex flex-col items-center py-4">
-        <p className="text-xl font-bold">
-          👩‍💻 Blog Pessoal Juliana Matos - Generation Br @ {data}
+      <div className="container flex flex-col items-center py-2 gap-1">
+        
+        <p className="text-sm font-medium">
+          👩‍💻 Blog Pessoal Juliana Matos - Generation Br © {data}
         </p>
 
-        <p className="text-lg">Conecte-se 💙</p>
-
-        <div className="flex gap-2">
-          <LinkedinLogoIcon size={48} weight="bold" />
-          <InstagramLogoIcon size={48} weight="bold" />
-          <FacebookLogoIcon size={48} weight="bold" />
+        <div className="flex items-center gap-3">
+          <span className="text-xs">Conecte-se</span>
+          <LinkedinLogoIcon size={20} weight="bold" />
+          <InstagramLogoIcon size={20} weight="bold" />
+          <FacebookLogoIcon size={20} weight="bold" />
         </div>
+
       </div>
     </footer>
   )

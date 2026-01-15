@@ -3,7 +3,7 @@ function Navbar() {
     <header className="w-full bg-gray-300 text-gray-800">
       <div className="container mx-auto flex justify-between py-4 px-8 text-lg">
         <span className="font-bold">
-          👩‍💻 Blog Pessoal
+          👩‍💻 Blog Pessoal 
         </span>
 
         <nav className="flex gap-4">

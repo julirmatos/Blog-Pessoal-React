@@ -4,12 +4,18 @@ import Navbar from "./components/navbar/navbar";
 
 function App() {
   return (
-  <>
-  <Navbar />
-  <Home />
-  <Footer />
-  </>
+    <div className="flex flex-col h-screen">
+      <Navbar />
+      <main className="flex-1 overflow-hidden">
+        <Home />
+      </main>
+      <Footer />
+    </div>
   );
 }
 
 export default App;
+
+
+
+
