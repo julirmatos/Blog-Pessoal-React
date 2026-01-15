@@ -5,8 +5,8 @@ function Footer() {
   let data = new Date().getFullYear()
 
   return (
-    <footer className="flex justify-center bg-gray-300 text-gray-800">
-      <div className="container flex flex-col items-center py-2 gap-1">
+    <footer className="w-full fixed bottom-0 left-0 z-50 bg-gray-300 text-gray-800">
+      <div className="max-w-7xl mx-auto flex flex-col items-center py-2 gap-1">
         
         <p className="text-sm font-medium">
           👩‍💻 Blog Pessoal Juliana Matos - Generation Br © {data}
