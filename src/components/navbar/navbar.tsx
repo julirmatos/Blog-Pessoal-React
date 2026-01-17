@@ -1,6 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    navigate("/");
+  }
+
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-gray-100 shadow-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
@@ -25,9 +31,13 @@ function Navbar() {
           <Link to="/perfil" className="hover:text-[#7aa3a3] transition">
             Perfil
           </Link>
-          <Link to="/sair" className="hover:text-[#7aa3a3] transition">
+
+          <button
+            onClick={handleLogout}
+            className="hover:text-[#7aa3a3] transition font-semibold"
+          >
             Sair
-          </Link>
+          </button>
         </nav>
 
       </div>
