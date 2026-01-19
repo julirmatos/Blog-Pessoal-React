@@ -112,7 +112,7 @@ function Cadastro() {
             onSubmit={cadastrarNovoUsuario}
           >
 
-            {/* ✅ INPUT NOME — IMPLEMENTADO CONFORME A IMAGEM */}
+            {/* INPUT NOME  */}
             <div className="w-full">
               <label htmlFor="nome" className="text-sm font-semibold text-gray-700">
                 Nome
@@ -136,7 +136,7 @@ function Cadastro() {
                 name="usuario"
                 value={usuario.usuario}
                 onChange={atualizarEstado}
-                placeholder="Usuário"
+                placeholder="Email"
                 className="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-[#7aa3a3]"
               />
             </div>

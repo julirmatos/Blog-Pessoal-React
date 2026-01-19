@@ -1,9 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
-
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 function Navbar() {
   const navigate = useNavigate();
 
-  function handleLogout() {
+  const { handleLogout } = useContext(AuthContext);
+
+  function logout() {
+    handleLogout();
+    alert("Usuário deslogado");
     navigate("/");
   }
 
@@ -33,7 +38,7 @@ function Navbar() {
           </Link>
 
           <button
-            onClick={handleLogout}
+            onClick={logout}
             className="hover:text-[#7aa3a3] transition font-semibold"
           >
             Sair
