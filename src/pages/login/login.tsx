@@ -60,7 +60,7 @@ function Login() {
                 name="usuario"
                 value={usuarioLogin.usuario}
                 onChange={atualizarEstado}
-                placeholder="Digite seu usuário"
+                placeholder="Digite seu email"
                 className="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-[#7aa3a3]"
               />
             </div>
