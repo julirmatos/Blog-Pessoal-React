@@ -9,8 +9,9 @@ import CadastrarTema from "./pages/cadastrarTema/cadastrarTema";
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
+    <BrowserRouter>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
 
       <main className="flex-1 overflow-hidden pt-20">
         <Routes>
@@ -22,8 +23,9 @@ function App() {
         </Routes>
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
