@@ -1,9 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function Navbar() {
   const navigate = useNavigate();
+  const { handleLogout } = useContext(AuthContext);
 
-  function handleLogout() {
+  function logout() {
+    handleLogout();
     navigate("/");
   }
 
@@ -22,18 +26,22 @@ function Navbar() {
           <Link to="/postagens" className="hover:text-[#7aa3a3] transition">
             Postagens
           </Link>
+
           <Link to="/temas" className="hover:text-[#7aa3a3] transition">
             Temas
           </Link>
+
+          {/* ✅ CADASTRAR TEMA */}
           <Link to="/cadastrar-tema" className="hover:text-[#7aa3a3] transition">
-            Cadastrar tema
+            Cadastrar Tema
           </Link>
+
           <Link to="/perfil" className="hover:text-[#7aa3a3] transition">
             Perfil
           </Link>
 
           <button
-            onClick={handleLogout}
+            onClick={logout}
             className="hover:text-[#7aa3a3] transition font-semibold"
           >
             Sair
