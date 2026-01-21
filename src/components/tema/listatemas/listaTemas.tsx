@@ -3,26 +3,39 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Tema from "../../../models/Tema";
 import { buscar } from "../../../services/Services";
-import CardTema from "../../../components/tema/cardtema/cardTema";
+import CardTema from "../cardTema/CardTema";
+
 
 function ListaTemas() {
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [temas, setTemas] = useState<Tema[]>([]);
+  const [verificandoAuth, setVerificandoAuth] = useState(true);
 
   const { usuario, handleLogout } = useContext(AuthContext);
-  const token = usuario.token;
+  const token = usuario?.token ?? "";
 
-  // 🔐 Proteção silenciosa
+  /* proteção de rota (CORRIGIDA) */
   useEffect(() => {
-    if (!token) {
-      navigate("/");
-      return;
+    if (!verificandoAuth) {
+      if (token === "") {
+        alert("Você precisa estar logado!");
+        navigate("/");
+      }
     }
+  }, [token, verificandoAuth, navigate]);
 
-    buscarTemas();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  /* marca que a verificação inicial terminou */
+  useEffect(() => {
+    setVerificandoAuth(false);
+  }, []);
+
+  /* buscar temas SOMENTE se tiver token */
+  useEffect(() => {
+    if (token !== "") {
+      buscarTemas();
+    }
   }, [token]);
 
   async function buscarTemas() {
@@ -35,9 +48,8 @@ function ListaTemas() {
         },
       });
     } catch (error: any) {
-      if (error?.toString().includes("401")) {
+      if (error.toString().includes("401")) {
         handleLogout();
-        navigate("/");
       }
     } finally {
       setIsLoading(false);

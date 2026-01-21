@@ -1,11 +1,15 @@
+import { useNavigate } from "react-router-dom";
+
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-[#6f9a9a] min-h-screen flex flex-col">
 
       {/* TOPO / BOAS-VINDAS */}
       <section className="flex justify-center py-16">
-
         <div className="w-full max-w-7xl px-6">
+
           <div
             className="
               relative
@@ -14,7 +18,6 @@ function Home() {
               rounded-3xl
               overflow-hidden
               bg-[#6f9a9a]
-              p-6
             "
           >
             {/* BACKGROUND IMAGE */}
@@ -24,7 +27,6 @@ function Home() {
                 inset-0
                 bg-cover
                 bg-center
-                rounded-2xl
               "
               style={{
                 backgroundImage:
@@ -35,10 +37,10 @@ function Home() {
             {/* CONTEÚDO SOBREPOSTO */}
             <div className="relative grid grid-cols-1 md:grid-cols-2 h-full items-center">
 
-              {/* COLUNA ESQUERDA VAZIA */}
+              {/* COLUNA ESQUERDA (RESERVA VISUAL) */}
               <div className="hidden md:block" />
 
-              {/* CARD À DIREITA */}
+              {/* CARD DIREITO */}
               <div className="flex justify-center md:justify-end p-6">
                 <div
                   className="
@@ -46,37 +48,22 @@ function Home() {
                     backdrop-blur
                     rounded-3xl
                     shadow-2xl
-                    p-12
+                    p-10
                     max-w-xl
                     text-center
                   "
                 >
-                  <h2
-                    className="
-                      text-4xl
-                      md:text-5xl
-                      font-extrabold
-                      tracking-tight
-                      text-[#2b2b2b]
-                    "
-                  >
+                  <h2 className="text-4xl md:text-5xl font-extrabold text-[#2b2b2b]">
                     👋 Bem-vindos(as) ao Blog da Ju!
                   </h2>
 
-                  <p
-                    className="
-                      text-lg
-                      md:text-xl
-                      text-[#4f7f7a]
-                      mt-6
-                      leading-relaxed
-                    "
-                  >
+                  <p className="text-lg md:text-xl text-[#4f7f7a] mt-6 leading-relaxed">
                     Expresse aqui seus pensamentos, ideias e opiniões de forma leve,
                     moderna e inspiradora 💭
                   </p>
 
                   <button
+                    onClick={() => navigate("/cadastrarpostagem")}
                     className="
                       mt-10
                       px-10
@@ -84,24 +71,21 @@ function Home() {
                       text-lg
                       font-semibold
                       rounded-xl
-                      border
-                      border-[#6f9a9a]
                       bg-[#6f9a9a]
                       text-white
-                      hover:bg-white
-                      hover:text-[#3f6f7a]
-                      hover:border-[#3f6f7a]
+                      hover:bg-[#5f8a8a]
                       transition-all
                       duration-300
                     "
                   >
-                    Nova Postagem
+                    ✍️ Nova Postagem
                   </button>
                 </div>
               </div>
 
             </div>
           </div>
+
         </div>
       </section>
 
@@ -113,7 +97,7 @@ function Home() {
             Últimas Postagens
           </h3>
 
-          <div className="bg-white rounded-2xl shadow-lg p-8 min-h-[100px] flex items-center justify-center">
+          <div className="bg-white rounded-2xl shadow-lg p-8 min-h-[120px] flex items-center justify-center">
             <span className="text-gray-400 text-lg">
               Nenhuma postagem ainda ✍️
             </span>
