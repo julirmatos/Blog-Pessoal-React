@@ -1,5 +1,5 @@
-import { useContext,  useEffect,  useState} from "react";
-import type {ChangeEvent,  FormEvent} from "react";
+import { useContext, useEffect, useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Tema from "../../../models/Tema";
@@ -9,51 +9,41 @@ import { ToastAlerta } from "../../../utils/ToastAlerta";
 const baseUrl = "https://blogpessoal-sml6.onrender.com";
 
 // =======================
-// Services
+// Services (Refatorados para gerenciar o Token)
 // =======================
-
-async function buscar(
-  path: string,
-  setState: Function,
-  options: RequestInit = {}
-) {
-  const resp = await fetch(baseUrl + path, { method: "GET", ...options });
+async function buscar(path: string, setState: Function, token: string) {
+  const resp = await fetch(baseUrl + path, {
+    method: "GET",
+    headers: {
+      Authorization: token.startsWith("Bearer") ? token : `Bearer ${token}`,
+    },
+  });
   if (!resp.ok) throw new Error(`${resp.status}`);
   const data = await resp.json();
   setState(data);
 }
 
-async function cadastrar(
-  path: string,
-  body: any,
-  options: RequestInit = {}
-) {
+async function cadastrar(path: string, body: any, token: string) {
   const resp = await fetch(baseUrl + path, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      ...(options.headers || {}),
+      Authorization: token.startsWith("Bearer") ? token : `Bearer ${token}`,
     },
     body: JSON.stringify(body),
-    ...options,
   });
 
   if (!resp.ok) throw new Error(`${resp.status}`);
 }
 
-async function atualizar(
-  path: string,
-  body: any,
-  options: RequestInit = {}
-) {
+async function atualizar(path: string, body: any, token: string) {
   const resp = await fetch(baseUrl + path, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      ...(options.headers || {}),
+      Authorization: token.startsWith("Bearer") ? token : `Bearer ${token}`,
     },
     body: JSON.stringify(body),
-    ...options,
   });
 
   if (!resp.ok) throw new Error(`${resp.status}`);
@@ -74,15 +64,14 @@ function FormPostagem() {
   const [tema, setTema] = useState<Tema>({ id: 0, descricao: "" });
   const [isLoading, setIsLoading] = useState(false);
 
- const [postagem, setPostagem] = useState<Postagem>({
-  id: 0,
-  titulo: "",
-  texto: "",
-  data: "",
-  tema: null,
-  usuario: usuario,
-});
-
+  const [postagem, setPostagem] = useState<Postagem>({
+    id: 0,
+    titulo: "",
+    texto: "",
+    data: "",
+    tema: null,
+    usuario: usuario,
+  });
 
   // =======================
   // Effects
@@ -100,7 +89,6 @@ function FormPostagem() {
     if (id) buscarPostagemPorId(id);
   }, [id]);
 
-  // 🔥 SINCRONIZA TEMA AO EDITAR
   useEffect(() => {
     if (postagem.tema) {
       setTema(postagem.tema);
@@ -113,9 +101,7 @@ function FormPostagem() {
 
   async function buscarPostagemPorId(id: string) {
     try {
-      await buscar(`/postagens/${id}`, setPostagem, {
-        headers: { Authorization: token },
-      });
+      await buscar(`/postagens/${id}`, setPostagem, token);
     } catch {
       handleLogout();
     }
@@ -123,19 +109,7 @@ function FormPostagem() {
 
   async function buscarTemas() {
     try {
-      await buscar("/temas", setTemas, {
-        headers: { Authorization: token },
-      });
-    } catch {
-      handleLogout();
-    }
-  }
-
-  async function buscarTemaPorId(id: number) {
-    try {
-      await buscar(`/temas/${id}`, setTema, {
-        headers: { Authorization: token },
-      });
+      await buscar("/temas", setTemas, token);
     } catch {
       handleLogout();
     }
@@ -168,41 +142,44 @@ function FormPostagem() {
 
     setIsLoading(true);
 
+    // Objeto limpo para o backend NestJS
     const postagemParaEnviar = {
-  titulo: postagem.titulo,
-  texto: postagem.texto,
-  data: new Date().toISOString().split('T')[0], 
-  tema: { id: tema.id },
-  usuario: { id: usuario.id }
-};
-
+      ...(id && { id: Number(id) }), // Inclui ID apenas se for edição
+      titulo: postagem.titulo,
+      texto: postagem.texto,
+      tema: {
+        id: tema.id,
+      },
+      usuario: {
+        id: usuario.id,
+      },
+    };
 
     try {
       if (id) {
-        await atualizar("/postagens", postagemParaEnviar, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
+        // No NestJS, geralmente o PUT é na rota /postagens enviando o ID no corpo
+        await atualizar("/postagens", postagemParaEnviar, token);
         ToastAlerta("Postagem atualizada com sucesso", "sucesso");
       } else {
-        await cadastrar("/postagens", postagemParaEnviar, {
-          headers: { Authorization: `Bearer ${token}`},
-        });
+        await cadastrar("/postagens", postagemParaEnviar, token);
         ToastAlerta("Postagem cadastrada com sucesso", "sucesso");
       }
 
       retornar();
-    } catch {
+    } catch (error) {
       ToastAlerta("Erro ao salvar a postagem", "erro");
     } finally {
       setIsLoading(false);
     }
   }
 
+  // =======================
+  // Render
+  // =======================
+
   return (
     <div className="min-h-screen bg-[#7aa3a3] pt-28 px-6 flex justify-center">
       <div className="w-full max-w-3xl bg-[#f3f5f2] rounded-3xl shadow-xl p-12">
-
         <button
           type="button"
           onClick={retornar}
@@ -216,7 +193,6 @@ function FormPostagem() {
         </h1>
 
         <form onSubmit={gerarNovaPostagem} className="flex flex-col gap-8">
-
           <div className="flex flex-col gap-3">
             <label className="text-lg font-semibold">Título</label>
             <input
@@ -245,7 +221,9 @@ function FormPostagem() {
             <label className="text-lg font-semibold">Tema</label>
             <select
               value={tema.id || ""}
-              onChange={(e) => buscarTemaPorId(Number(e.target.value))}
+              onChange={(e) =>
+                setTema({ id: Number(e.target.value), descricao: "" })
+              }
               required
               className="rounded-xl border border-gray-300 p-4 text-lg"
             >
