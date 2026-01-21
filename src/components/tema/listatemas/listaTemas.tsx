@@ -3,26 +3,34 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Tema from "../../../models/Tema";
 import { buscar } from "../../../services/Services";
-import CardTema from "../../../components/tema/cardtema/cardTema";
+import CardTema from "../cardTema/CardTema";
+
 
 function ListaTemas() {
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [temas, setTemas] = useState<Tema[]>([]);
+  const [verificandoAuth, setVerificandoAuth] = useState(true);
 
   const { usuario, handleLogout } = useContext(AuthContext);
-  const token = usuario.token;
+  const token = usuario?.token ?? "";
 
-  // 🔐 Proteção silenciosa
   useEffect(() => {
-    if (!token) {
+    if (!verificandoAuth && token === "") {
+      alert("Você precisa estar logado!");
       navigate("/");
-      return;
     }
+  }, [token, verificandoAuth, navigate]);
 
-    buscarTemas();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    setVerificandoAuth(false);
+  }, []);
+
+  useEffect(() => {
+    if (token !== "") {
+      buscarTemas();
+    }
   }, [token]);
 
   async function buscarTemas() {
@@ -35,9 +43,8 @@ function ListaTemas() {
         },
       });
     } catch (error: any) {
-      if (error?.toString().includes("401")) {
+      if (error.toString().includes("401")) {
         handleLogout();
-        navigate("/");
       }
     } finally {
       setIsLoading(false);
@@ -45,14 +52,15 @@ function ListaTemas() {
   }
 
   return (
-    <div className="flex justify-center w-full my-10">
-      <div className="container flex flex-col items-center">
+    // ⬇️ padding-top para não ficar atrás da navbar
+    <div className="flex justify-center w-full pt-24 pb-10">
+      <div className="container flex flex-col items-center px-4">
 
         <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-3">
           ✨ Temas
         </h1>
 
-        <p className="text-center text-gray-600 text-base mb-10">
+        <p className="text-center text-gray-600 text-base mb-12">
           📚 Confira os temas disponíveis no Blog da Ju 🌺
         </p>
 

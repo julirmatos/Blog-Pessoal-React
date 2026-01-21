@@ -1,9 +1,8 @@
-import { useEffect, useState, type ChangeEvent, type FormEvent, type CSSProperties } from 'react'
-import { useNavigate } from 'react-router-dom'
-import type Usuario from '../../models/Usuario'
-import { cadastrarUsuario } from '../../services/Services'
+import { useEffect, useState, type ChangeEvent, type FormEvent, type CSSProperties } from "react";
+import { useNavigate } from "react-router-dom";
+import type Usuario from "../../models/Usuario";
+import { cadastrarUsuario } from "../../services/Services";
 
-/** Lightweight Spinner to avoid 'react-spinners' dependency */
 function Spinner({ size = 20, color = '#fff' }: { size?: number; color?: string }) {
   const style: CSSProperties = {
     width: size,
@@ -46,7 +45,7 @@ function Cadastro() {
   }, [usuario])
 
   function retornar() {
-    navigate('/login')
+    navigate('/home')
   }
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
