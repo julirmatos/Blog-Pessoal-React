@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import Footer from "./components/footer/footer";
+import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/navbar";
 
 import DeletarPostagem from "./components/postagem/deletarPostagem/DeletarPostagem";
@@ -11,11 +11,11 @@ import ListaPostagens from "./components/postagem/listaPostagem/ListaPostagem";
 
 import DeletarTema from "./components/tema/deletarTema/DeletarTema";
 import FormTema from "./components/tema/formTema/FormTema";
-import ListaTemas from "./components/tema/listatemas/ListaTemas";
+import ListaTemas from "./components/tema/listatemas/listaTemas";
 
-import Cadastro from "./pages/cadastro/Cadastro";
-import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
+import Cadastro from "./pages/cadastro/cadastro";
+import Home from "./pages/home/home";
+import Login from "./pages/login/login";
 import Perfil from "./pages/perfil/Perfil";
 
 import "react-toastify/dist/ReactToastify.css";
