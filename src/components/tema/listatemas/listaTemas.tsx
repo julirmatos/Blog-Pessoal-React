@@ -16,22 +16,17 @@ function ListaTemas() {
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario?.token ?? "";
 
-  /* proteção de rota (CORRIGIDA) */
   useEffect(() => {
-    if (!verificandoAuth) {
-      if (token === "") {
-        alert("Você precisa estar logado!");
-        navigate("/");
-      }
+    if (!verificandoAuth && token === "") {
+      alert("Você precisa estar logado!");
+      navigate("/");
     }
   }, [token, verificandoAuth, navigate]);
 
-  /* marca que a verificação inicial terminou */
   useEffect(() => {
     setVerificandoAuth(false);
   }, []);
 
-  /* buscar temas SOMENTE se tiver token */
   useEffect(() => {
     if (token !== "") {
       buscarTemas();
@@ -57,14 +52,15 @@ function ListaTemas() {
   }
 
   return (
-    <div className="flex justify-center w-full my-10">
-      <div className="container flex flex-col items-center">
+    // ⬇️ padding-top para não ficar atrás da navbar
+    <div className="flex justify-center w-full pt-24 pb-10">
+      <div className="container flex flex-col items-center px-4">
 
         <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-3">
           ✨ Temas
         </h1>
 
-        <p className="text-center text-gray-600 text-base mb-10">
+        <p className="text-center text-gray-600 text-base mb-12">
           📚 Confira os temas disponíveis no Blog da Ju 🌺
         </p>
 

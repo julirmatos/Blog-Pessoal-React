@@ -16,15 +16,15 @@ function ListaPostagens() {
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
 
-  // 🔐 Verificação de login
+  //  Verificação de login
   useEffect(() => {
     if (token === "") {
       ToastAlerta("Você precisa estar logado!", "info");
       navigate("/");
     }
-  }, [token]);
+  }, [token, navigate]);
 
-  // 📌 Busca inicial das postagens (UMA ÚNICA VEZ)
+  //  Busca inicial das postagens
   useEffect(() => {
     buscarPostagens();
   }, []);
@@ -51,13 +51,14 @@ function ListaPostagens() {
   return (
     <>
       {isLoading && (
-        <div className="flex justify-center w-full my-8">
+        <div className="flex justify-center w-full pt-24">
           <span className="text-indigo-700 text-xl">Carregando...</span>
         </div>
       )}
 
-      <div className="flex justify-center w-full my-4">
-        <div className="container flex flex-col">
+      {/*   navbar */}
+      <div className="flex justify-center w-full pt-24 pb-10">
+        <div className="container flex flex-col px-4">
 
           {!isLoading && postagens.length === 0 && (
             <span className="text-3xl text-center my-8">

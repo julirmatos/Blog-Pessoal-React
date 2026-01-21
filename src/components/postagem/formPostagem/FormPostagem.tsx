@@ -142,9 +142,8 @@ function FormPostagem() {
 
     setIsLoading(true);
 
-    // Objeto limpo para o backend NestJS
     const postagemParaEnviar = {
-      ...(id && { id: Number(id) }), // Inclui ID apenas se for edição
+      ...(id && { id: Number(id) }), 
       titulo: postagem.titulo,
       texto: postagem.texto,
       tema: {
@@ -157,7 +156,6 @@ function FormPostagem() {
 
     try {
       if (id) {
-        // No NestJS, geralmente o PUT é na rota /postagens enviando o ID no corpo
         await atualizar("/postagens", postagemParaEnviar, token);
         ToastAlerta("Postagem atualizada com sucesso", "sucesso");
       } else {
