@@ -10,7 +10,7 @@ function CardTema({ tema }: CardTemaProps) {
     <div className="h-full bg-[#f3f5f2] rounded-3xl shadow-xl p-8 flex flex-col justify-between">
       
       <header>
-        {/* TÍTULO DO TEMA (corrigido) */}
+        
         <h2 className="text-2xl font-extrabold text-center text-gray-800 mb-6">
            {tema.descricao} 📌</h2>
       </header>

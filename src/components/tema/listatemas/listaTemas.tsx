@@ -3,17 +3,19 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Tema from "../../../models/Tema";
 import { buscar } from "../../../services/Services";
-import CardTema from "../cardTema/CardTema";
+import CardTema from "../cardtema/cardTema";
 
 
 function ListaTemas() {
   const navigate = useNavigate();
+  
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [temas, setTemas] = useState<Tema[]>([]);
   const [verificandoAuth, setVerificandoAuth] = useState(true);
 
   const { usuario, handleLogout } = useContext(AuthContext);
+
   const token = usuario?.token ?? "";
 
   useEffect(() => {
@@ -27,6 +29,7 @@ function ListaTemas() {
     setVerificandoAuth(false);
   }, []);
 
+  
   useEffect(() => {
     if (token !== "") {
       buscarTemas();
@@ -52,7 +55,7 @@ function ListaTemas() {
   }
 
   return (
-    // ⬇️ padding-top para não ficar atrás da navbar
+   
     <div className="flex justify-center w-full pt-24 pb-10">
       <div className="container flex flex-col items-center px-4">
 

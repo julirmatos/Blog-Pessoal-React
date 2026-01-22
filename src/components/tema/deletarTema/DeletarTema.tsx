@@ -74,44 +74,99 @@ function DeletarTema() {
     }
     
     return (
-        <div className='container w-1/3 mx-auto'>
-            <h1 className='text-4xl text-center my-4'>Deletar tema</h1>
-            <p className='text-center font-semibold mb-4'>
-                Você tem certeza de que deseja apagar o tema a seguir?</p>
-            <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
-                <header 
-                    className='py-2 px-6 bg-indigo-600 text-white font-bold text-2xl'>
-                    Tema
-                </header>
-                <p className='p-8 text-3xl bg-slate-200 h-full'>{tema.descricao}</p>
-                <div className="flex">
-                    <button 
-                        className='text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2'
-                        onClick={retornar}>
-                        Não
-                    </button>
-                    <button 
-                        className='w-full text-slate-100 bg-indigo-400 
-                                   hover:bg-indigo-600 flex items-center justify-center'
-                                   onClick={deletarTema}>
+  <div className="min-h-screen w-full flex items-center justify-center px-6">
+    
+    <div className="grid grid-cols-1 place-items-center w-full">
 
-                        { isLoading ? 
-                            <svg
-                                className="animate-spin h-6 w-6 text-white"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                            >
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-                            </svg> : 
-                            <span>Sim</span>
-                        }
+      {/* CARD DE DELETAR */}
+      <div className="w-full max-w-xl">
 
-                    </button>
-                </div>
-            </div>
+        <h1 className="text-4xl text-center mb-4">
+          Deletar tema
+        </h1>
+
+        <p className="text-center font-semibold mb-6">
+          Tem certeza de que deseja apagar este tema?
+        </p>
+
+        <div className="border rounded-3xl overflow-hidden shadow-lg bg-[#f6f7f3]">
+          
+          {/* Header */}
+          <header className="py-4 px-8 bg-[#7aa3a3] text-white font-bold text-2xl text-center">
+            Tema
+          </header>
+
+          {/* Conteúdo */}
+          <div className="py-12 text-center text-3xl flex justify-center items-center gap-3">
+            {tema.descricao}
+          </div>
+
+          {/* Botões */}
+          <div className="flex justify-center gap-6 pb-8">
+            
+            {/* NÃO */}
+            <button
+              className="
+                w-44 py-3
+                rounded-full
+                bg-[#d9dde3]
+                text-slate-700
+                font-medium
+                hover:bg-[#cfd4db]
+                transition
+              "
+              onClick={retornar}
+            >
+              Não
+            </button>
+
+            {/* DELETAR */}
+            <button
+              className="
+                w-44 py-3
+                rounded-full
+                bg-[#e75480]
+                text-white
+                font-medium
+                hover:bg-pink-600
+                transition
+                flex items-center justify-center
+              "
+              onClick={deletarTema}
+            >
+              {isLoading ? (
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  />
+                </svg>
+              ) : (
+                "Sim"
+              )}
+            </button>
+
+          </div>
         </div>
-    )
+      </div>
+
+    </div>
+  </div>
+)
 }
+
 export default DeletarTema

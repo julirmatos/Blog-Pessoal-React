@@ -7,6 +7,7 @@ import { buscar } from "../../services/Services";
 function Home() {
   const navigate = useNavigate();
 
+
   const { usuario } = useContext(AuthContext);
 
   const [postagens, setPostagens] = useState<Postagem[]>([]);
@@ -32,8 +33,7 @@ function Home() {
   return (
     <div className="bg-[#6f9a9a] min-h-screen flex flex-col">
 
-      {/* TOPO / BOAS-VINDAS */}
-      <section className="flex justify-center py-5 md:py-30"> 
+        <section className="flex justify-center py-5 md:py-30"> 
         <div className="container mx-auto overflow-hidden px-6">
 
           <div className="relative w-full h-[520px] rounded-3xl overflow-hidden bg-[#6f9a9a] flex items-center">
@@ -95,8 +95,7 @@ function Home() {
         </div>
       </section>
 
-      {/* LISTAGEM DE POSTAGENS */}
-      <section className="bg-[#f2f1ed] flex justify-center py-16">
+        <section className="bg-[#f2f1ed] flex justify-center py-16">
         <div className="w-full max-w-7xl px-6">
 
           <h3 className="text-3xl font-bold text-[#2b2b2b] mb-8 text-center">

@@ -31,7 +31,6 @@ function Navbar() {
             Temas
           </Link>
 
-          {/* ✅ CADASTRAR TEMA */}
           <Link to="/cadastrar-tema" className="hover:text-[#7aa3a3] transition">
             Cadastrar Tema
           </Link>
